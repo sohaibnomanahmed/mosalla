@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mosalla/providers/prayer_time_provider.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
@@ -23,14 +24,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.teal,
-      ),
+          primarySwatch: Colors.teal,
+          textTheme: GoogleFonts.ralewayTextTheme(Theme.of(context)
+                  .textTheme // If this is not set, then ThemeData.light().textTheme is used.
+              )),
       home: ChangeNotifierProvider(
-        create: (_) => PrayerTimeProvider(),
-        child:  const PrayerTimePage()
-      ),
+          create: (_) => PrayerTimeProvider(), child: const PrayerTimePage()),
     );
   }
 }
-
-
