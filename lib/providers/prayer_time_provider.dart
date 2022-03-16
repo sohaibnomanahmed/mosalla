@@ -31,19 +31,19 @@ class PrayerTimeProvider with ChangeNotifier{
       _activePrayer = 0;
     }
     if (_prayerData!.sunrise != null && time.isAfterTime(_prayerData!.sunrise!)){
-      _activePrayer = null;
-    }
-    if (_prayerData!.duhr != null && time.isAfterTime(_prayerData!.duhr!)){
       _activePrayer = 1;
     }
-    if (_prayerData!.asr != null && time.isAfterTime(_prayerData!.asr!)){
+    if (_prayerData!.duhr != null && time.isAfterTime(_prayerData!.duhr!)){
       _activePrayer = 2;
     }
-    if (_prayerData!.maghrib != null && time.isAfterTime(_prayerData!.maghrib!)){
+    if (_prayerData!.asr != null && time.isAfterTime(_prayerData!.asr!)){
       _activePrayer = 3;
     }
-    if (_prayerData!.isha != null && time.isAfterTime(_prayerData!.isha!)){
+    if (_prayerData!.maghrib != null && time.isAfterTime(_prayerData!.maghrib!)){
       _activePrayer = 4;
+    }
+    if (_prayerData!.isha != null && time.isAfterTime(_prayerData!.isha!)){
+      _activePrayer = 5;
     }
     print(_activePrayer);
   }
@@ -77,22 +77,25 @@ class PrayerTimeProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  void fetchPrayerTimes(DateTime date){
+  void fetchPrayerTimes(){
+    DateTime date = DateTime.now();
     final stream = FirebaseFirestore.instance
             .collection('mosalla/MSS/prayer_times')
             .doc(DateFormat('dd-MM-yyyy').format(date))
             .snapshots()
             .map((doc) => PrayerData.fromFirestore(doc));
-    
+    //TODO need to call this method every day, when new day starts shows old data
     _subscription = stream.listen(
       (prayerData) async {
+        // when data is changed needs to update the time
+        DateTime time = DateTime.now();
         _prayerData = prayerData;
         //final response = await SunriseSunset.getResults(date: DateTime.now(), latitude: 59.9139, longitude: 10.7522);
-        var sunriseSunset = getSunriseSunset(59.9139, 10.7522, 1, DateTime.now());
+        var sunriseSunset = getSunriseSunset(59.9139, 10.7522, 1, time);
         _prayerData!.sunrise = sunriseSunset.sunrise;
-        setActivePrayer(date);
-        setEndTime(date);
-        // TODO if after isha get data from tomorrow
+        setActivePrayer(time);
+        setEndTime(time);
+
         _isLoading = false;
         notifyListeners();
       },

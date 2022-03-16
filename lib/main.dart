@@ -24,10 +24,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-          primarySwatch: Colors.teal,
-          textTheme: GoogleFonts.ralewayTextTheme(Theme.of(context)
-                  .textTheme // If this is not set, then ThemeData.light().textTheme is used.
-              )),
+        primarySwatch: Colors.teal,
+        //textTheme: GoogleFonts.ralewayTextTheme(Theme.of(context).textTheme),
+      ),
       home: ChangeNotifierProvider(
           create: (_) => PrayerTimeProvider(), child: const PrayerTimePage()),
     );
