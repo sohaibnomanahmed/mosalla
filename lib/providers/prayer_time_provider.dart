@@ -15,6 +15,7 @@ class PrayerTimeProvider with ChangeNotifier{
   int? _activePrayer;
   PrayerData? _prayerData;
   DateTime? _endTime;
+  late DateTime _date;
   late final StreamSubscription _subscription;
   bool _correction = false;
 
@@ -24,6 +25,7 @@ class PrayerTimeProvider with ChangeNotifier{
   int? get activePrayer => _activePrayer;
   PrayerData? get prayerData => _prayerData;
   DateTime? get endTime => _endTime;
+  DateTime get date => _date;
 
   // methods
   void setActivePrayer(DateTime time) {
@@ -63,7 +65,7 @@ class PrayerTimeProvider with ChangeNotifier{
     }
     if (_prayerData!.fajr != null && time.isBeforeTime(_prayerData!.fajr!)){
       _endTime = _prayerData!.fajr!;
-    } 
+    }
     print(_endTime);
   }
 
@@ -78,10 +80,10 @@ class PrayerTimeProvider with ChangeNotifier{
   }
 
   void fetchPrayerTimes(){
-    DateTime date = DateTime.now();
+    _date = DateTime.now();
     final stream = FirebaseFirestore.instance
             .collection('mosalla/MSS/prayer_times')
-            .doc(DateFormat('dd-MM-yyyy').format(date))
+            .doc(DateFormat('dd-MM-yyyy').format(_date))
             .snapshots()
             .map((doc) => PrayerData.fromFirestore(doc));
     //TODO need to call this method every day, when new day starts shows old data

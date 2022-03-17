@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_compass/flutter_compass.dart';
+import 'package:intl/intl.dart';
 import 'package:mosalla/providers/prayer_time_provider.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
@@ -45,7 +46,7 @@ class _PrayerTimePageState extends State<PrayerTimePage>
     final activePrayer = context.watch<PrayerTimeProvider>().activePrayer;
     final endTime = context.watch<PrayerTimeProvider>().endTime;
     final isLoading = context.watch<PrayerTimeProvider>().isLoading;
-    final isError = context.watch<PrayerTimeProvider>().isError;
+    final date = context.watch<PrayerTimeProvider>().date;
     return Scaffold(
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
@@ -107,6 +108,18 @@ class _PrayerTimePageState extends State<PrayerTimePage>
                                           .read<PrayerTimeProvider>()
                                           .updateDisplay(date);
                                     }),
+                                ListTile(
+                                  contentPadding:
+                                      const EdgeInsets.symmetric(horizontal: 0),
+                                  leading: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Icon(Icons.date_range_rounded),
+                                      const SizedBox(width: 10),
+                                      Text(DateFormat.MMMMd().format(date))
+                                    ],
+                                  ),
+                                )
                               ],
                             ),
                           ),
@@ -158,18 +171,20 @@ class _PrayerTimePageState extends State<PrayerTimePage>
                     // ),
                     // TODO test if no data is added
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: PrayerTime(
-                                prayerData: prayerData!,
-                                activePrayer: activePrayer,
-                              ),
+                      child: PrayerTime(
+                        prayerData: prayerData!,
+                        activePrayer: activePrayer,
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
             ),
+      bottomNavigationBar: BottomNavigationBar(items: const [
+        BottomNavigationBarItem(icon: Icon(Icons.label, color: Colors.transparent), label: ''),
+        BottomNavigationBarItem(icon: Icon(Icons.place_rounded), label: 'UiO Mosalla'),
+        BottomNavigationBarItem(icon: Icon(Icons.label, color: Colors.transparent), label: '')
+      ]),
     );
   }
 }
