@@ -63,56 +63,67 @@ class _PrayerTimePageState extends State<PrayerTimePage>
                       children: [
                         Image.asset(
                           'assets/images/logo.png',
-                          height: 200,
+                          height: 190,
                         ),
                         Flexible(
                           child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                FittedBox(
-                                  child: Text(
-                                    countDownPrayer == 0
-                                        ? 'Fajr in'
-                                        : countDownPrayer == 1
-                                            ? 'Sunrise in'
-                                            : countDownPrayer == 2
-                                                ? 'Duhr in'
-                                                : countDownPrayer == 3
-                                                    ? 'Asr in'
-                                                    : countDownPrayer == 4
-                                                        ? 'Maghrib in'
-                                                        : countDownPrayer == 5
-                                                            ? 'Isha in'
-                                                            : 'Mosalla',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline4!
-                                        .copyWith(
-                                            fontWeight: FontWeight.bold,
-                                            color:
-                                                Theme.of(context).primaryColor),
-                                  ),
+                            padding: const EdgeInsets.only(right: 8.0),
+                            // child: Card(
+                            //   elevation: 0,
+                            //   color: Theme.of(context).canvasColor,
+                            //   shape: RoundedRectangleBorder(
+                            //     borderRadius: BorderRadius.circular(15.0),
+                            //   ),
+                            //   child: Padding(
+                            //     padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    FittedBox(
+                                      child: Text(
+                                        countDownPrayer == 0
+                                            ? 'Fajr in'
+                                            : countDownPrayer == 1
+                                                ? 'Sunrise in'
+                                                : countDownPrayer == 2
+                                                    ? 'Duhr in'
+                                                    : countDownPrayer == 3
+                                                        ? 'Asr in'
+                                                        : countDownPrayer == 4
+                                                            ? 'Maghrib in'
+                                                            : countDownPrayer == 5
+                                                                ? 'Isha in'
+                                                                : countDownPrayer == 6
+                                                                ? 'Jumu‘ah in' : 'Mosalla',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline4!
+                                            .copyWith(
+                                                fontWeight: FontWeight.bold,
+                                                color: Theme.of(context)
+                                                    .primaryColor),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 5),
+                                    PrayerCountDown(
+                                      endTime: endTime,
+                                    ),
+                                    // ListTile(
+                                    //   contentPadding:
+                                    //       const EdgeInsets.symmetric(horizontal: 0),
+                                    //   leading: Row(
+                                    //     mainAxisSize: MainAxisSize.min,
+                                    //     children: [
+                                    //       const Icon(Icons.date_range_rounded),
+                                    //       const SizedBox(width: 10),
+                                    //       Text(DateFormat.MMMMd().format(date))
+                                    //     ],
+                                    //   ),
+                                    // )
+                                  ],
                                 ),
-                                PrayerCountDown(
-                                  endTime: endTime,
-                                ),
-                                // ListTile(
-                                //   contentPadding:
-                                //       const EdgeInsets.symmetric(horizontal: 0),
-                                //   leading: Row(
-                                //     mainAxisSize: MainAxisSize.min,
-                                //     children: [
-                                //       const Icon(Icons.date_range_rounded),
-                                //       const SizedBox(width: 10),
-                                //       Text(DateFormat.MMMMd().format(date))
-                                //     ],
-                                //   ),
-                                // )
-                              ],
-                            ),
+                              //),
+                            //),
                           ),
                         ),
                       ],

@@ -20,6 +20,7 @@ class PrayerCountDown extends StatelessWidget {
     return endTime == null
         ? const Text('No more prayers today')
         : CountdownTimer(
+            //textStyle: Theme.of(context).textTheme.headline5!.copyWith(color: Colors.grey[700]),
             onEnd: () {
               // I think the date is one second before end time, for safety we add 10 second even thogh 2 should be enough
               if (countDownTomorrow) {

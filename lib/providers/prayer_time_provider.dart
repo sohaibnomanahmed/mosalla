@@ -42,6 +42,9 @@ class PrayerTimeProvider with ChangeNotifier{
     if (_prayerData!.duhr != null && time.isAfterTime(_prayerData!.duhr!)){
       _activePrayer = 2;
     }
+    if (_prayerData!.jumma != null && time.weekday == DateTime.friday && time.isAfterTime(_prayerData!.jumma!)){
+      _activePrayer = 6;
+    }
     if (_prayerData!.asr != null && time.isAfterTime(_prayerData!.asr!)){
       _activePrayer = 3;
     }
@@ -71,6 +74,10 @@ class PrayerTimeProvider with ChangeNotifier{
     if (_prayerData!.duhr != null && time.isBeforeTime(_prayerData!.duhr!)){
       _endTime = _prayerData!.duhr!;
       _countDownPrayer = 2;
+    }
+    if (_prayerData!.jumma != null && time.weekday == DateTime.friday && time.isBeforeTime(_prayerData!.jumma!)){
+      _endTime = _prayerData!.jumma!;
+      _countDownPrayer = 6;
     }
     if (_prayerData!.sunrise != null && time.isBeforeTime(_prayerData!.sunrise!)){
       _endTime = _prayerData!.sunrise!;

@@ -20,17 +20,8 @@ class PrayerTime extends StatelessWidget {
   Widget build(BuildContext context) {
     final date = context.watch<PrayerTimeProvider>().date;
     return Column(children: [
-      // ListTile(
-      //   leading: Row(
-      //     mainAxisSize: MainAxisSize.min,
-      //     children: [
-      //       const Icon(Icons.calendar_month_rounded),
-      //       const SizedBox(width: 10),
-      //       Text(DateFormat('dd-MM-yyyy').format(date)),
-      //     ],
-      //   ),
-      // ),
       ListTile(
+        minVerticalPadding: 0,
           //dense: true,
           //onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Time left'))),
           leading: Row(
@@ -58,7 +49,7 @@ class PrayerTime extends StatelessWidget {
         child: Column(
           children: [
             ListTile(
-                //dense: true,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                 textColor: activePrayer != null && activePrayer == 0
                     ? Colors.white
                     : null,
@@ -71,7 +62,7 @@ class PrayerTime extends StatelessWidget {
                     ? '- -'
                     : DateFormat.Hm().format(prayerData.fajr!))),
             ListTile(
-                //dense: true,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                 textColor: activePrayer != null && activePrayer == 1
                     ? Colors.white
                     : null,
@@ -84,7 +75,7 @@ class PrayerTime extends StatelessWidget {
                     ? '- -'
                     : DateFormat.Hm().format(prayerData.sunrise!))),
             ListTile(
-                //dense: true,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                 textColor: activePrayer != null && activePrayer == 2
                     ? Colors.white
                     : null,
@@ -97,7 +88,7 @@ class PrayerTime extends StatelessWidget {
                     ? '- -'
                     : DateFormat.Hm().format(prayerData.duhr!))),
             ListTile(
-                //dense: true,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                 textColor: activePrayer != null && activePrayer == 3
                     ? Colors.white
                     : null,
@@ -110,7 +101,7 @@ class PrayerTime extends StatelessWidget {
                     ? '- -'
                     : DateFormat.Hm().format(prayerData.asr!))),
             ListTile(
-                //dense: true,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                 textColor: activePrayer != null && activePrayer == 4
                     ? Colors.white
                     : null,
@@ -123,7 +114,7 @@ class PrayerTime extends StatelessWidget {
                     ? '- -'
                     : DateFormat.Hm().format(prayerData.maghrib!))),
             ListTile(
-                //dense: true,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                 textColor: activePrayer != null && activePrayer == 5
                     ? Colors.white
                     : null,
@@ -136,8 +127,13 @@ class PrayerTime extends StatelessWidget {
                     ? '- -'
                     : DateFormat.Hm().format(prayerData.isha!))),
             ListTile(
-                //dense: true,
-                tileColor: null, // Colors.teal[50],
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                textColor: activePrayer != null && activePrayer == 6
+                    ? Colors.white
+                    : null,
+                tileColor: activePrayer != null && activePrayer == 6
+                    ? activeColor
+                    : null,     
                 leading: const Text('الجمعة'),
                 title: const Text('Jumu‘ah'),
                 trailing: Text(prayerData.jumma == null
