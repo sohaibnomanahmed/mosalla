@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_compass/flutter_compass.dart';
-import 'package:intl/intl.dart';
 import 'package:mosalla/providers/prayer_time_provider.dart';
 import 'package:provider/provider.dart';
-import 'dart:math';
 
 import '../widgets/prayer_countdown.dart';
 import '../widgets/prayer_time.dart';
@@ -34,23 +31,22 @@ class _PrayerTimePageState extends State<PrayerTimePage>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
     if (AppLifecycleState.resumed == state) {
-      final date = DateTime.now().add(const Duration(seconds: 10));
-      context.read<PrayerTimeProvider>().updateDisplay(date);
+      context.read<PrayerTimeProvider>().updateDisplay();
     }
-    print(state);
   }
 
   @override
   Widget build(BuildContext context) {
     final prayerData = context.watch<PrayerTimeProvider>().prayerData;
     final activePrayer = context.watch<PrayerTimeProvider>().activePrayer;
+    final countDownPrayer = context.watch<PrayerTimeProvider>().countDownPrayer;
     final endTime = context.watch<PrayerTimeProvider>().endTime;
     final isLoading = context.watch<PrayerTimeProvider>().isLoading;
-    final date = context.watch<PrayerTimeProvider>().date;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
-          : Container(
+          : SingleChildScrollView(
               // decoration: const BoxDecoration(
               //   image: DecorationImage(
               //     image: AssetImage("assets/images/bg.jpeg"),
@@ -78,17 +74,19 @@ class _PrayerTimePageState extends State<PrayerTimePage>
                               children: [
                                 FittedBox(
                                   child: Text(
-                                    activePrayer == 0
-                                        ? 'Sunrise in'
-                                        : activePrayer == 1
-                                            ? 'Duhr in'
-                                            : activePrayer == 2
-                                                ? 'Asr in'
-                                                : activePrayer == 3
-                                                    ? 'Maghrib in'
-                                                    : activePrayer == 4
-                                                        ? 'Isha in'
-                                                        : 'Mosalla',
+                                    countDownPrayer == 0
+                                        ? 'Fajr in'
+                                        : countDownPrayer == 1
+                                            ? 'Sunrise in'
+                                            : countDownPrayer == 2
+                                                ? 'Duhr in'
+                                                : countDownPrayer == 3
+                                                    ? 'Asr in'
+                                                    : countDownPrayer == 4
+                                                        ? 'Maghrib in'
+                                                        : countDownPrayer == 5
+                                                            ? 'Isha in'
+                                                            : 'Mosalla',
                                     style: Theme.of(context)
                                         .textTheme
                                         .headline4!
@@ -99,27 +97,20 @@ class _PrayerTimePageState extends State<PrayerTimePage>
                                   ),
                                 ),
                                 PrayerCountDown(
-                                    endTime: endTime,
-                                    onEnd: () {
-                                      // I think the date is one second before end time, for safety we add 10 second even thogh 2 should be enough
-                                      final date = DateTime.now()
-                                          .add(const Duration(seconds: 10));
-                                      context
-                                          .read<PrayerTimeProvider>()
-                                          .updateDisplay(date);
-                                    }),
-                                ListTile(
-                                  contentPadding:
-                                      const EdgeInsets.symmetric(horizontal: 0),
-                                  leading: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      const Icon(Icons.date_range_rounded),
-                                      const SizedBox(width: 10),
-                                      Text(DateFormat.MMMMd().format(date))
-                                    ],
-                                  ),
-                                )
+                                  endTime: endTime,
+                                ),
+                                // ListTile(
+                                //   contentPadding:
+                                //       const EdgeInsets.symmetric(horizontal: 0),
+                                //   leading: Row(
+                                //     mainAxisSize: MainAxisSize.min,
+                                //     children: [
+                                //       const Icon(Icons.date_range_rounded),
+                                //       const SizedBox(width: 10),
+                                //       Text(DateFormat.MMMMd().format(date))
+                                //     ],
+                                //   ),
+                                // )
                               ],
                             ),
                           ),
@@ -170,7 +161,8 @@ class _PrayerTimePageState extends State<PrayerTimePage>
                     //   },
                     // ),
                     // TODO test if no data is added
-                    Expanded(
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: PrayerTime(
                         prayerData: prayerData!,
                         activePrayer: activePrayer,
@@ -180,11 +172,11 @@ class _PrayerTimePageState extends State<PrayerTimePage>
                 ),
               ),
             ),
-      bottomNavigationBar: BottomNavigationBar(items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.label, color: Colors.transparent), label: ''),
-        BottomNavigationBarItem(icon: Icon(Icons.place_rounded), label: 'UiO Mosalla'),
-        BottomNavigationBarItem(icon: Icon(Icons.label, color: Colors.transparent), label: '')
-      ]),
+      // bottomNavigationBar: BottomNavigationBar(items: const [
+      //   BottomNavigationBarItem(icon: Icon(Icons.label, color: Colors.transparent), label: ''),
+      //   BottomNavigationBarItem(icon: Icon(Icons.place_rounded), label: 'UiO Mosalla'),
+      //   BottomNavigationBarItem(icon: Icon(Icons.label, color: Colors.transparent), label: '')
+      // ]),
     );
   }
 }
