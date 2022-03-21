@@ -153,6 +153,14 @@ class PrayerTime extends StatelessWidget {
             Text(DateFormat.MMMMd().format(date)),
           ],
         ),
+        trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              Text('UiO Mosalla'),
+              SizedBox(width: 10),
+              Icon(Icons.place_rounded),
+            ],
+          ),
       )
       // trailing: Row(
       //   mainAxisSize: MainAxisSize.min,

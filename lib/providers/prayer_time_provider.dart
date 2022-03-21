@@ -59,6 +59,8 @@ class PrayerTimeProvider with ChangeNotifier{
 
   void setEndTime(DateTime time) {
     _countDownTomorrow = false;
+    _countDownPrayer = null;
+    _endTime = null;
     if (_prayerData!.isha != null && time.isBeforeTime(_prayerData!.isha!)){
       _endTime = _prayerData!.isha!;
       _countDownPrayer = 5;

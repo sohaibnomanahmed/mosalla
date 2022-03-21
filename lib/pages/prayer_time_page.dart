@@ -67,110 +67,47 @@ class _PrayerTimePageState extends State<PrayerTimePage>
                         ),
                         Flexible(
                           child: Padding(
-                            padding: const EdgeInsets.only(right: 8.0),
-                            // child: Card(
-                            //   elevation: 0,
-                            //   color: Theme.of(context).canvasColor,
-                            //   shape: RoundedRectangleBorder(
-                            //     borderRadius: BorderRadius.circular(15.0),
-                            //   ),
-                            //   child: Padding(
-                            //     padding: const EdgeInsets.all(16.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    FittedBox(
-                                      child: Text(
-                                        countDownPrayer == 0
-                                            ? 'Fajr in'
-                                            : countDownPrayer == 1
-                                                ? 'Sunrise in'
-                                                : countDownPrayer == 2
-                                                    ? 'Duhr in'
-                                                    : countDownPrayer == 3
-                                                        ? 'Asr in'
-                                                        : countDownPrayer == 4
-                                                            ? 'Maghrib in'
-                                                            : countDownPrayer == 5
-                                                                ? 'Isha in'
-                                                                : countDownPrayer == 6
-                                                                ? 'Jumu‘ah in' : 'Mosalla',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline4!
-                                            .copyWith(
-                                                fontWeight: FontWeight.bold,
-                                                color: Theme.of(context)
-                                                    .primaryColor),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 5),
-                                    PrayerCountDown(
-                                      endTime: endTime,
-                                    ),
-                                    // ListTile(
-                                    //   contentPadding:
-                                    //       const EdgeInsets.symmetric(horizontal: 0),
-                                    //   leading: Row(
-                                    //     mainAxisSize: MainAxisSize.min,
-                                    //     children: [
-                                    //       const Icon(Icons.date_range_rounded),
-                                    //       const SizedBox(width: 10),
-                                    //       Text(DateFormat.MMMMd().format(date))
-                                    //     ],
-                                    //   ),
-                                    // )
-                                  ],
+                            padding: const EdgeInsets.only(right: 16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                FittedBox(
+                                  child: Text(
+                                    countDownPrayer == 0
+                                        ? 'Fajr Jamaat in'
+                                        : countDownPrayer == 1
+                                            ? 'Sunrise in'
+                                            : countDownPrayer == 2
+                                                ? 'Duhr Jamaat in'
+                                                : countDownPrayer == 3
+                                                    ? 'Asr Jamaat in'
+                                                    : countDownPrayer == 4
+                                                        ? 'Maghrib Jamaat in'
+                                                        : countDownPrayer == 5
+                                                            ? 'Isha Jamaat in'
+                                                            : countDownPrayer ==
+                                                                    6
+                                                                ? 'Jumu‘ah Jamaat in'
+                                                                : 'Mosalla',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline4!
+                                        .copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            color:
+                                                Theme.of(context).primaryColor),
+                                  ),
                                 ),
-                              //),
-                            //),
+                                const SizedBox(height: 5),
+                                PrayerCountDown(
+                                  endTime: endTime,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
                     ),
-                    // StreamBuilder<CompassEvent>(
-                    //   stream: FlutterCompass.events,
-                    //   builder: (context, snapshot) {
-                    //     if (snapshot.hasError) {
-                    //       return Text('Error reading heading: ${snapshot.error}');
-                    //     }
-
-                    //     if (snapshot.connectionState == ConnectionState.waiting) {
-                    //       return Center(
-                    //         child: CircularProgressIndicator(),
-                    //       );
-                    //     }
-
-                    //     double? direction = snapshot.data!.heading;
-
-                    //     // if direction is null, then device does not support this sensor
-                    //     // show error message
-                    //     if (direction == null)
-                    //       return Center(
-                    //         child: Text("Device does not have sensors !"),
-                    //       );
-
-                    //     return Material(
-                    //       shape: CircleBorder(),
-                    //       clipBehavior: Clip.antiAlias,
-                    //       elevation: 4.0,
-                    //       child: Container(
-                    //         padding: EdgeInsets.all(16.0),
-                    //         alignment: Alignment.center,
-                    //         decoration: BoxDecoration(
-                    //           shape: BoxShape.circle,
-                    //         ),
-                    //         child: Transform.rotate(
-                    //           angle: (direction * (pi / 180) * -1),
-                    //           child: Image.asset(
-                    //             'assets/images/logo.png',
-                    //             height: 150,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     );
-                    //   },
-                    // ),
                     // TODO test if no data is added
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -183,11 +120,6 @@ class _PrayerTimePageState extends State<PrayerTimePage>
                 ),
               ),
             ),
-      // bottomNavigationBar: BottomNavigationBar(items: const [
-      //   BottomNavigationBarItem(icon: Icon(Icons.label, color: Colors.transparent), label: ''),
-      //   BottomNavigationBarItem(icon: Icon(Icons.place_rounded), label: 'UiO Mosalla'),
-      //   BottomNavigationBarItem(icon: Icon(Icons.label, color: Colors.transparent), label: '')
-      // ]),
     );
   }
 }

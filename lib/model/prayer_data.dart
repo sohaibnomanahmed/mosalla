@@ -13,29 +13,20 @@ class PrayerData {
 
   PrayerData({
     required this.id,
-    required this.fajr,
-    required this.duhr,
-    required this.asr,
-    required this.maghrib,
-    required this.isha,
-    required this.jumma,
-    required this.date,
+    this.fajr,
+    this.duhr,
+    this.asr,
+    this.maghrib,
+    this.isha,
+    this.jumma,
+    this.date,
     this.sunrise,
   });
 
   factory PrayerData.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>?;
     if (data == null) {
-      throw 'Error creating PrayerData from null';
-      // return PrayerData(
-      //   id: '',
-      //   fajr: '',
-      //   duhr: '',
-      //   asr: '',
-      //   maghrib: '',
-      //   isha: '',
-      //   date: '',
-      // );
+      return PrayerData(id: '');
     }
     final Timestamp? fajr = data['Fajr'];
     final Timestamp? duhr = data['Duhr'];
