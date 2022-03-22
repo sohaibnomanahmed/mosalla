@@ -14,8 +14,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      //statusBarColor: Colors.transparent, // for Android
-      //statusBarIconBrightness: Brightness.dark, // for Android
+      statusBarColor: Colors.transparent, // for Android
+      statusBarIconBrightness: Brightness.dark, // for Android
       statusBarBrightness: Brightness.light // for IOS
       ));
   runApp(const MyApp());
@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.teal,
         //textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme),
