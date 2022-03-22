@@ -108,7 +108,6 @@ class _PrayerTimePageState extends State<PrayerTimePage>
                         ),
                       ],
                     ),
-                    // TODO test if no data is added
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: PrayerTime(
